@@ -1,0 +1,12 @@
+const passport = require('passport');
+const { verifyCallback } = require('./callback');
+
+const auth = (...requiredRights) => async (req, res, next) => {
+  return new Promise((resolve, reject) => {
+    passport.authenticate("cookie", { session: false }, verifyCallback(req, resolve, reject, requiredRights))(req, res, next);
+  })
+    .then(() => next())
+    .catch((err) => next(err));
+};
+
+module.exports = auth;

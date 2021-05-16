@@ -1,0 +1,1 @@
+module.exports.UserSerializer = require('./user.serializer');
